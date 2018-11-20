@@ -11,8 +11,11 @@ namespace ConsoleApplication1
 {
     class PropertiesHolder
     {
-        static void Main(string[] args)
+        static string DEFAULT_PATH = "Packages/default-properties.json"
+
+        public PropertiesHolder()
         {
+
         }
 
         string serialize(Properties properties)
@@ -57,14 +60,14 @@ namespace ConsoleApplication1
 
     class Properties
     {
-        public int score5 { get; set; }
-        public int score4 { get; set; }
-        public int score3 { get; set; }
-        public int score2 { get; set; }
-        public int score1 { get; set; }
+        public int score5=1000 { get; set; }
+        public int score4=30 { get; set; }
+        public int score3=10 { get; set; }
+        public int score2=0 { get; set; }
+        public int score1=-10 { get; set; }
 
-        public int additionalRound { get; set; }
-        public int round { get; set; }
+        public int additionalRound=100 { get; set; }
+        public int round=5 { get; set; }
 
    }
 }
