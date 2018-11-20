@@ -1,0 +1,10 @@
+﻿{
+  "SpinCost": 10,
+  "SmallSpinCost": 5,
+  "StartBalance": 100,
+  "Prize1": 0,
+  "Prize2": 5,
+  "Prize3": 20,
+  "Prize4": 30,
+  "Prize5": 1000
+}
