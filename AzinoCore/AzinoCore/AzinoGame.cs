@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace AzinoCore
 {
@@ -23,23 +24,36 @@ namespace AzinoCore
             Balance += Rules.GetDelta(State);
         }
 
+        public void SmallSpin(int index)
+        {
+            if (Balance < Rules.SmallSpinCost)
+                return;
+            Balance -= Rules.SmallSpinCost;
+            Random r = new Random();
+            State[index] = r.Next(10);
+            Balance += Rules.GetDelta(State);
+        }
+
         public int Balance { get; private set; }
         public int[] State { get; private set; }
     }
 
     public static class Rules
     {
+        static AzinoProperties Config;
+
+        public static int SpinCost => Config.SpinCost;
+        public static int SmallSpinCost => Config.SmallSpinCost;
+        public static int StartBalance => Config.StartBalance;
+        public static int Prize1 => Config.Prize1;
+        public static int Prize2 => Config.Prize2;
+        public static int Prize3 => Config.Prize3;
+        public static int Prize4 => Config.Prize4;
+        public static int Prize5 => Config.Prize5;
+
         static Rules()
         {
-            StartBalance = 100;
-            SpinCost = 10;
-            Prize1 = -20;
-            Prize2 = 0;
-            Prize3 = 20;
-            Prize4 = 30;
-            Prize5 = 100;
-            Prize2and2 = 50;
-            Prize2and3 = 80;
+            Config = AzinoProperties.Load("config.json");
         }
 
         public static int GetDelta(int[] state)
@@ -54,24 +68,13 @@ namespace AzinoCore
             {
                 combos[x]++;
             }
-            if (combos[5] > 0) return Prize5;
-            if (combos[4] > 0) return Prize4;
-            if (combos[3] > 0 && combos[2] > 0) return Prize2and3;
-            if (combos[3] > 0) return Prize3;
-            if (combos[2] > 1) return Prize2and2;
-            if (combos[2] > 0) return Prize2;
-            return Prize1;
+            int prize = Config.Prize1 * combos[1]
+                      + Config.Prize2 * combos[2]
+                      + Config.Prize3 * combos[3]
+                      + Config.Prize4 * combos[4]
+                      + Config.Prize5 * combos[5];
+            return prize;
         }
-
-        public static int SpinCost { get; }
-        public static int StartBalance { get; }
-        public static int Prize1 { get; }
-        public static int Prize2 { get; }
-        public static int Prize3 { get; }
-        public static int Prize4 { get; }
-        public static int Prize5 { get; }
-        public static int Prize2and2 { get; }
-        public static int Prize2and3 { get; }
     }
 }
 
