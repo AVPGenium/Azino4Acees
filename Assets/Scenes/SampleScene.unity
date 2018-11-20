@@ -771,6 +771,8 @@ MonoBehaviour:
     type: 2}
   perentTranform: {fileID: 349876696}
   initElements: []
+  balance: {fileID: 573297874}
+  winValue: {fileID: 967173730}
   valuePanel: 5
 --- !u!4 &1397524193
 Transform:
@@ -937,6 +939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fad7989695e9a84a88313fdbc58c6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  viewController: {fileID: 0}
 --- !u!1 &1905323990
 GameObject:
   m_ObjectHideFlags: 0
